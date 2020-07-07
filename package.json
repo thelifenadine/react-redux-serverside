@@ -1,5 +1,5 @@
 {
-  "name": "yes",
+  "name": "react-redux-serverside",
   "version": "1.0.0",
   "description": "a template for an app build with react, redux, webpack etc",
   "scripts": {
@@ -7,7 +7,7 @@
     "server": "nodemon ./build/server.bundle.js",
     "build-watch": "webpack -w",
     "coverage": "nyc npm run test",
-    "coveralls": "cat ./coverage/lcov.info | node  --trace-uncaught ./node_modules/coveralls/bin/coveralls.js",
+    "coveralls": "cat ./coverage/lcov.info | node ./node_modules/coveralls/bin/coveralls.js",
     "test": "NODE_ENV=test mocha --require @babel/register --require ./test/helpers.js || exit 0",
     "lint": "eslint './src/**/*.js'",
     "lint-test": "eslint 'src/**/*.test.js'"
