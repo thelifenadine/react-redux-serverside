@@ -1,0 +1,73 @@
+{
+  "name": "yes",
+  "version": "1.0.0",
+  "description": "a template for an app build with react, redux, webpack etc",
+  "scripts": {
+    "start": "NODE_ENV=development npm run build-watch & npm run server",
+    "server": "nodemon ./build/server.bundle.js",
+    "build-watch": "webpack -w",
+    "coverage": "nyc npm run test",
+    "test": "mocha --require @babel/register --require ./test/helpers.js || exit 0",
+    "lint": "eslint './src/**/*.js'",
+    "lint-test": "eslint 'src/**/*.test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thelifenadine/react-redux-serverside.git"
+  },
+  "author": "Nadine Kinnen",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/thelifenadine/react-redux-serverside/issues"
+  },
+  "homepage": "https://github.com/thelifenadine/react-redux-serverside#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/register": "^7.10.4",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^7.4.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
+    "express": "^4.17.1",
+    "file-loader": "^6.0.0",
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "proxyquire": "^2.1.3",
+    "redux-logger": "^3.0.6",
+    "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.10.4",
+    "cors": "^2.8.5",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "serialize-javascript": "^4.0.0"
+  }
+}
