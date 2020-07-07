@@ -19,7 +19,11 @@ const renderApp = () => hydrate(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById("app")
+  document.getElementById("app"),
+  () => {
+    const ssStyles = document.getElementById('jss-styles');
+    ssStyles.parentNode.removeChild(ssStyles);
+  }
 );
 
 renderApp();

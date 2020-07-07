@@ -1,13 +1,18 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import { ThemeProvider } from 'react-jss';
 import Header from './Header';
 import Home from './Home';
 import AnotherPage from './AnotherPage';
 import NotFound from './NotFound';
 
+const theme = {
+  colorPrimary: 'blue'
+};
+
 const App = () => (
-  <React.Fragment>
+  <ThemeProvider theme={theme}>
     <Header />
     <Switch>
       <Route exact path="/">
@@ -18,7 +23,7 @@ const App = () => (
       </Route>
       <NotFound default />
     </Switch>
-  </React.Fragment>
+  </ThemeProvider>
 );
 
 export default App;

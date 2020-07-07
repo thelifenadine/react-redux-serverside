@@ -9,7 +9,7 @@ const renderFullPage = (markup, initialState, title, css) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${title}</title>
       <script id="initial-state">window.__INITIAL_DATA__=${serialize(initialState)}</script>
-      <style id="jss-server-side">${css}</style>
+      <style type="text/css" id="jss-styles">${css.toString()}</style>
       </head>
 
       <body>
