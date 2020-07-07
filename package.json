@@ -7,7 +7,8 @@
     "server": "nodemon ./build/server.bundle.js",
     "build-watch": "webpack -w",
     "coverage": "nyc npm run test",
-    "test": "mocha --require @babel/register --require ./test/helpers.js || exit 0",
+    "coveralls": "cat ./coverage/lcov.info | node  --trace-uncaught ./node_modules/coveralls/bin/coveralls.js",
+    "test": "NODE_ENV=test mocha --require @babel/register --require ./test/helpers.js || exit 0",
     "lint": "eslint './src/**/*.js'",
     "lint-test": "eslint 'src/**/*.test.js'"
   },
@@ -30,11 +31,11 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.10.4",
-    "@istanbuljs/nyc-config-babel": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "chai": "^4.2.0",
     "clean-webpack-plugin": "^3.0.0",
+    "coveralls": "^3.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^7.4.0",
@@ -45,6 +46,7 @@
     "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "mocha": "^8.0.1",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "proxyquire": "^2.1.3",
@@ -69,5 +71,14 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^4.0.0"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   }
 }
