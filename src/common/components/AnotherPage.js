@@ -1,14 +1,11 @@
 import React from 'react';
 import { createUseStyles, useTheme } from 'react-jss';
 
-const useStyles = createUseStyles(theme => ({
-  container: {
-    color: theme.colorPrimary,
-  },
+const useStyles = createUseStyles({
   anotherH2: {
-    color: 'yellow',
+    color: 'orange',
   }
-}));
+});
 
 const AnotherPage = (props) => {
   const theme = useTheme();

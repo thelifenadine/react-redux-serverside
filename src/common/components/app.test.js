@@ -4,52 +4,42 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 
-const MockSwitch = sinon.stub().returns(<div />);
-const MockRoute = sinon.stub().returns(<div />);
-const MockHome = sinon.stub().returns(<div />);
-const MockOther = sinon.stub().returns(<div />);
-const MockNotFound = sinon.stub().returns(<div />);
+const MockThemeProvider = sinon.stub().returns(<div />);
+const MockMainLayout = sinon.stub().returns(<div />);
+const mockTheme = { theColor: 'purple' };
 
 describe('<App />', () => {
   let App;
 
   before(() => {
     App = proxyquire.noCallThru().load('./App', {
-      'react-router-dom': {
-        Switch: MockSwitch,
-        Route: MockRoute,
+      'react-jss': {
+        ThemeProvider: MockThemeProvider,
       },
-      './Home': MockHome,
-      './AnotherPage': MockOther,
-      './NotFound': MockNotFound,
+      './MainLayout': MockMainLayout,
+      '../styles/theme': mockTheme,
     }).default;
   });
 
   describe('the components expected to be rendered', () => {
     let myComponent;
+    let themeProvider;
 
     before(() => {
       myComponent = shallow(<App />);
+      themeProvider = myComponent.find(MockThemeProvider);
     });
 
-    it('should contain one Switch component', () => {
-      expect(myComponent.find(MockSwitch)).to.have.lengthOf(1);
+    it('should contain one ThemeProvider component', () => {
+      expect(themeProvider).to.have.lengthOf(1);
     });
 
-    it('should contain two Route components', () => {
-      expect(myComponent.find(MockRoute)).to.have.lengthOf(2);
+    it('ThemeProvider should be passed the theme', () => {
+      expect(themeProvider.getElement().props.theme).to.be.eql(mockTheme);
     });
 
-    it('should contain one Home component', () => {
-      expect(myComponent.find(MockHome)).to.have.lengthOf(1);
-    });
-
-    it('should contain one Other component', () => {
-      expect(myComponent.find(MockOther)).to.have.lengthOf(1);
-    });
-
-    it('should contain one NotFound component', () => {
-      expect(myComponent.find(MockNotFound)).to.have.lengthOf(1);
+    it('should contain one MainLayout component', () => {
+      expect(myComponent.find(MockMainLayout)).to.have.lengthOf(1);
     });
   });
 });

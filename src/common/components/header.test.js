@@ -8,6 +8,9 @@ const MockLink = sinon.stub().returns(<div />);
 
 describe('<Header />', () => {
   let Header;
+  const useLocationStub = sinon.stub().returns({ pathname: '/' });
+  const useStylesStub = sinon.stub().returns({});
+  const createUseStylesStub = sinon.stub().withArgs({}).returns(useStylesStub);
   const dispatchStub = sinon.stub();
   const useDispatchStub = sinon.stub().returns(dispatchStub);
   const appInitOnceStub = sinon.stub();
@@ -16,13 +19,17 @@ describe('<Header />', () => {
     Header = proxyquire.noCallThru().load('./Header', {
       'react-router-dom': {
         Link: MockLink,
+        useLocation: useLocationStub,
       },
       'react-redux': {
         useDispatch: useDispatchStub,
       },
+      'react-jss': {
+        createUseStyles: createUseStylesStub,
+      },
       '../actions/app': {
         appInitOnce: appInitOnceStub,
-      }
+      },
     }).default;
   });
 
