@@ -1,12 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from 'react-jss';
-
-import MainLayout from './MainLayout';
+import { renderRoutes } from 'react-router-config';
 import theme from '../styles/theme';
+import routes from '../routes';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <MainLayout />
+    {renderRoutes(routes)}
   </ThemeProvider>
 );
 

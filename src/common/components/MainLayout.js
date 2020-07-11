@@ -1,11 +1,9 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { createUseStyles  } from 'react-jss';
+import { renderRoutes } from 'react-router-config';
 
 import Header from './Header';
-import Home from './Home';
-import AnotherPage from './AnotherPage';
-import NotFound from './NotFound';
 import globalStyles from '../styles/globalStyles';
 import { mediaQueryMin768, mediaQueryMin1000 } from '../styles/mediaQueries';
 
@@ -31,7 +29,7 @@ const useStyles = createUseStyles((theme) => ({
   }
 }));
 
-const MainLayout = () => {
+const MainLayout = ({ route }) => {
   const css = useStyles();
 
   return (
@@ -42,19 +40,15 @@ const MainLayout = () => {
       />
       <div className={css.columnContainer}>
         <div className={css.containerItem}>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/another">
-              <AnotherPage />
-            </Route>
-            <NotFound default />
-          </Switch>
+          {renderRoutes(route.routes)}
         </div>
       </div>
     </div>
   );
+};
+
+MainLayout.propTypes = {
+  route: PropTypes.object.isRequired,
 };
 
 export default MainLayout;

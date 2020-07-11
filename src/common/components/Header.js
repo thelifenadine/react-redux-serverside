@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { appInitOnce } from '../actions/app';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
+
+import { appInitOnce } from '../actions/app';
 
 const useStyles = createUseStyles((theme) => ({
   container: {

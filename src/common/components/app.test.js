@@ -5,18 +5,22 @@ import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 
 const MockThemeProvider = sinon.stub().returns(<div />);
-const MockMainLayout = sinon.stub().returns(<div />);
+const renderRoutesStub = sinon.stub();
 const mockTheme = { theColor: 'purple' };
+const mockRoutes = [{ component: 'hi' }];
 
 describe('<App />', () => {
   let App;
 
   before(() => {
     App = proxyquire.noCallThru().load('./App', {
+      'react-router-config': {
+        renderRoutes: renderRoutesStub,
+      },
       'react-jss': {
         ThemeProvider: MockThemeProvider,
       },
-      './MainLayout': MockMainLayout,
+      '../routes': mockRoutes,
       '../styles/theme': mockTheme,
     }).default;
   });
@@ -38,8 +42,8 @@ describe('<App />', () => {
       expect(themeProvider.getElement().props.theme).to.be.eql(mockTheme);
     });
 
-    it('should contain one MainLayout component', () => {
-      expect(myComponent.find(MockMainLayout)).to.have.lengthOf(1);
+    it('should invoke the renderRoutes once with the routes from the prop', () => {
+      expect(renderRoutesStub).calledOnce.calledOnceWith(mockRoutes);
     });
   });
 });

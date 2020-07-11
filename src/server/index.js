@@ -9,6 +9,7 @@ import { JssProvider, SheetsRegistry, createGenerateId } from 'react-jss';
 import configureStore from '../common/configureStore';
 import renderFullPage from './renderFullPage';
 import App from '../common/components/App';
+// import { matchRoutes, renderRoutes } from "react-router-config";
 
 const app = express();
 

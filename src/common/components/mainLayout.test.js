@@ -4,13 +4,13 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 
-const MockSwitch = sinon.stub().returns(<div />);
-const MockRoute = sinon.stub().returns(<div />);
-const MockHome = sinon.stub().returns(<div />);
-const MockOther = sinon.stub().returns(<div />);
-const MockNotFound = sinon.stub().returns(<div />);
 
-const useStylesStub = sinon.stub().returns({});
+const MockHeader = sinon.stub().returns(<div />);
+const renderRoutesStub = sinon.stub();
+const useStylesStub = sinon.stub().returns({
+  columnContainer: 'columnContainerTest',
+  containerItem: 'containerItemTest',
+});
 const createUseStylesStub = sinon.stub().withArgs({}).returns(useStylesStub);
 
 describe('<MainLayout />', () => {
@@ -18,44 +18,39 @@ describe('<MainLayout />', () => {
 
   before(() => {
     MainLayout = proxyquire.noCallThru().load('./MainLayout', {
-      'react-router-dom': {
-        Switch: MockSwitch,
-        Route: MockRoute,
+      'react-router-config': {
+        renderRoutes: renderRoutesStub,
       },
       'react-jss': {
         createUseStyles: createUseStylesStub,
       },
-      './Home': MockHome,
-      './AnotherPage': MockOther,
-      './NotFound': MockNotFound,
+      './Header': MockHeader,
     }).default;
   });
 
-  describe('the components expected to be rendered', () => {
+  describe('the expected behavior', () => {
     let myComponent;
+    let header;
+    const mockRouteProp = {
+      routes: [],
+    };
 
     before(() => {
-      myComponent = shallow(<MainLayout />);
+      myComponent = shallow(<MainLayout route={mockRouteProp} />);
+      header = myComponent.find(MockHeader);
     });
 
-    it('should contain one Switch component', () => {
-      expect(myComponent.find(MockSwitch)).to.have.lengthOf(1);
+    it('should contain one Header component', () => {
+      expect(header).to.have.lengthOf(1);
     });
 
-    it('should contain two Route components', () => {
-      expect(myComponent.find(MockRoute)).to.have.lengthOf(2);
+    it('the header component should be passed the correct props', () => {
+      expect(header.getElement().props.containerClassName).to.be.eql('columnContainerTest');
+      expect(header.getElement().props.itemClassName).to.be.eql('containerItemTest');
     });
 
-    it('should contain one Home component', () => {
-      expect(myComponent.find(MockHome)).to.have.lengthOf(1);
-    });
-
-    it('should contain one Other component', () => {
-      expect(myComponent.find(MockOther)).to.have.lengthOf(1);
-    });
-
-    it('should contain one NotFound component', () => {
-      expect(myComponent.find(MockNotFound)).to.have.lengthOf(1);
+    it('should invoke the renderRoutes once with the routes from the prop', () => {
+      expect(renderRoutesStub).calledOnce.calledOnceWith(mockRouteProp.routes);
     });
   });
 });

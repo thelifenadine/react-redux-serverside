@@ -5,6 +5,7 @@ export default (theme) => ({
       MozOsxFontSmoothing: 'grayscale', // Antialiasing.
       boxSizing: 'border-box',
       fontSize: 16,
+      fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
     },
     '*, *: before, *: after': {
       boxSizing: 'inherit',
