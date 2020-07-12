@@ -5,7 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 
-import { appInitOnce } from '../actions/app';
+// import { appInitOnce } from '../actions/app';
+import { fetchPostsIfNeeded } from '../actions/recipe';
 
 const useStyles = createUseStyles((theme) => ({
   container: {
@@ -27,6 +28,7 @@ const useStyles = createUseStyles((theme) => ({
 const getActiveTab = (currentPath) => ({
   home: currentPath === '/',
   another: currentPath === '/another',
+  somewhere: currentPath === '/somewhere',
 });
 
 const Header = ({ containerClassName, itemClassName }) => {
@@ -38,7 +40,7 @@ const Header = ({ containerClassName, itemClassName }) => {
 
   // dispatch hook example
   const onClickHandler = () => {
-    dispatch(appInitOnce());
+    dispatch(fetchPostsIfNeeded('sweets'));
   };
 
   useEffect(() => {
@@ -57,10 +59,16 @@ const Header = ({ containerClassName, itemClassName }) => {
           HOME
         </Link>
         <Link
-          className={clsx(css.link, {[css.active]: activeTabs.another })}
-          to="/another"
+          className={clsx(css.link, { [css.active]: activeTabs.somewhere })}
+          to="/somewhere"
         >
           SOMEWHERE ELSE
+        </Link>
+        <Link
+          className={clsx(css.link, { [css.active]: activeTabs.another })}
+          to="/another"
+        >
+          ANOTHER ONE
         </Link>
       </div>
     </div>
