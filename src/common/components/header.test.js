@@ -13,7 +13,7 @@ describe('<Header />', () => {
   const createUseStylesStub = sinon.stub().withArgs({}).returns(useStylesStub);
   const dispatchStub = sinon.stub();
   const useDispatchStub = sinon.stub().returns(dispatchStub);
-  const appInitOnceStub = sinon.stub();
+  const fetchRecipesIfNeededStub = sinon.stub();
 
   before(() => {
     Header = proxyquire.noCallThru().load('./Header', {
@@ -27,8 +27,8 @@ describe('<Header />', () => {
       'react-jss': {
         createUseStyles: createUseStylesStub,
       },
-      '../actions/app': {
-        appInitOnce: appInitOnceStub,
+      '../actions/recipes': {
+        fetchRecipesIfNeeded: fetchRecipesIfNeededStub,
       },
     }).default;
   });
@@ -40,8 +40,8 @@ describe('<Header />', () => {
       myComponent = shallow(<Header />);
     });
 
-    it('should contain two Link components', () => {
-      expect(myComponent.find(MockLink)).to.have.lengthOf(2);
+    it('should contain 3 Link components', () => {
+      expect(myComponent.find(MockLink)).to.have.lengthOf(3);
     });
 
     it('should invoke the useDispatch function once', () => {
@@ -61,8 +61,8 @@ describe('<Header />', () => {
       expect(dispatchStub).calledOnce;
     });
 
-    it('should invoke the appInitOnce function once', () => {
-      expect(appInitOnceStub).calledOnce;
+    it('should invoke the fetchRecipesIfNeeded function once', () => {
+      expect(fetchRecipesIfNeededStub).calledOnce;
     });
   });
 });

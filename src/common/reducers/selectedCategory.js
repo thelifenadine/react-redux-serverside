@@ -2,7 +2,7 @@ import createMappedReducer from './createMappedReducer';
 
 import {
   SELECT_CATEGORY,
-} from '../actions/recipe';
+} from '../actions/recipes';
 
 const initialState = 'sweets';
 

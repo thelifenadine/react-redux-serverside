@@ -38,7 +38,7 @@ router.post('/getByCategory', (req, res) => {
   const cat = req.body.category;
 
   if (!cat) {
-    res.status(500).send('category is required');
+    res.status(500).send({ msg: 'category is required'});
   }
 
   const selectedData = filter(data, (item) => (item.category === cat));

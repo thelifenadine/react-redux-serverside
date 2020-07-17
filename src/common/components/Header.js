@@ -5,8 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 
-// import { appInitOnce } from '../actions/app';
-import { fetchPostsIfNeeded } from '../actions/recipe';
+import { fetchRecipesIfNeeded } from '../actions/recipes';
 
 const useStyles = createUseStyles((theme) => ({
   container: {
@@ -40,7 +39,7 @@ const Header = ({ containerClassName, itemClassName }) => {
 
   // dispatch hook example
   const onClickHandler = () => {
-    dispatch(fetchPostsIfNeeded('sweets'));
+    dispatch(fetchRecipesIfNeeded('lunch'));
   };
 
   useEffect(() => {

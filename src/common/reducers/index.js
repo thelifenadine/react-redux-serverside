@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import app from './app';
-import categories from './categories';
-import recipes from './recipes';
+import selectedCategory from './selectedCategory';
+import recipesByCategory from './recipesByCategory';
 
 export default combineReducers({
   app,
-  recipesByCategory: recipes,
-  selectedCategory: categories,
+  recipesByCategory,
+  selectedCategory,
 });
