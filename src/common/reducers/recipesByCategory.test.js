@@ -18,5 +18,5 @@ describe('recipesByCategory reducer', () => {
         items: [],
       }
     });
-  })
-})
+  });
+});
