@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 
-
 const MockHeader = sinon.stub().returns(<div />);
 const renderRoutesStub = sinon.stub();
 const useStylesStub = sinon.stub().returns({
@@ -23,6 +22,9 @@ describe('<MainLayout />', () => {
       },
       'react-jss': {
         createUseStyles: createUseStylesStub,
+      },
+      'redux-connect': {
+        asyncConnect: sinon.spy(() => component => component),
       },
       './Header': MockHeader,
       './withTheme': (component) => (component),

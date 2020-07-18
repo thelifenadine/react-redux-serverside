@@ -2,8 +2,8 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
 import routes from '../common/routes';
+import { ReduxAsyncConnect } from 'redux-connect';
 import configureStore from '../common/configureStore';
 
 const store = configureStore(window.__INITIAL_DATA__);
@@ -16,7 +16,7 @@ if (initialState) {
 const renderApp = () => hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      {renderRoutes(routes)}
+      <ReduxAsyncConnect routes={routes} />
     </BrowserRouter>
   </Provider>,
   document.getElementById("app"),

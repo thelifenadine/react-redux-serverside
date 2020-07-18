@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles  } from 'react-jss';
+import { asyncConnect } from 'redux-connect';
 import { renderRoutes } from 'react-router-config';
 import Header from './Header';
 import withTheme from './withTheme';
 import globalStyles from '../styles/globalStyles';
 import { mediaQueryMin768, mediaQueryMin1000 } from '../styles/mediaQueries';
+import { fetchRecipesIfNeeded } from '../actions/recipes';
 
 const useStyles = createUseStyles((theme) => ({
   ...globalStyles(theme),
@@ -31,7 +33,6 @@ const useStyles = createUseStyles((theme) => ({
 
 const MainLayout = ({ route }) => {
   const css = useStyles();
-
   return (
     <div className={css.mainLayout}>
       <Header
@@ -51,4 +52,11 @@ MainLayout.propTypes = {
   route: PropTypes.object.isRequired,
 };
 
-export default withTheme(MainLayout);
+export default asyncConnect([
+  {
+    promise: ({ store: { dispatch } }) => (
+      dispatch(fetchRecipesIfNeeded('appetizer'))
+    ),
+  }
+])(withTheme(MainLayout));
+

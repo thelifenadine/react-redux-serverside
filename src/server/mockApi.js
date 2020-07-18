@@ -23,6 +23,14 @@ let data = [{
   name: 'Oatmeal Chocolate Chip Cookies',
   category: 'sweets',
   description: `Nadine's summer favorite`,
+}, {
+  name: 'Spinach artichoke dip',
+  category: 'appetizer',
+  description: 'Party Time',
+}, {
+  name: 'Cheezy Scallion Dip',
+  category: 'appetizer',
+  description: 'Party Time 2',
 }];
 
 router.get('/list', (req, res) => {
