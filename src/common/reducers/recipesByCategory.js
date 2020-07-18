@@ -1,4 +1,4 @@
-import createMappedReducer from './createMappedReducer';
+import createMappedReducer from './utils/createMappedReducer';
 import createRequestHandlers from './utils/createRequestHandlers';
 
 import {

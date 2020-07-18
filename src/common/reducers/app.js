@@ -1,4 +1,4 @@
-import createMappedReducer from './createMappedReducer';
+import createMappedReducer from './utils/createMappedReducer';
 import { APP_INIT } from '../actions/app';
 
 const initialState = {
