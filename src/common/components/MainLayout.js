@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles  } from 'react-jss';
 import { renderRoutes } from 'react-router-config';
-
 import Header from './Header';
+import withTheme from './withTheme';
 import globalStyles from '../styles/globalStyles';
 import { mediaQueryMin768, mediaQueryMin1000 } from '../styles/mediaQueries';
 
@@ -51,4 +51,4 @@ MainLayout.propTypes = {
   route: PropTypes.object.isRequired,
 };
 
-export default MainLayout;
+export default withTheme(MainLayout);

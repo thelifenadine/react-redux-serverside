@@ -5,33 +5,28 @@ import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 
 const MockThemeProvider = sinon.stub().returns(<div />);
-const renderRoutesStub = sinon.stub();
+const MockBaseComponent = sinon.stub().returns(<div />);
 const mockTheme = { theColor: 'purple' };
-const mockRoutes = [{ component: 'hi' }];
 
-describe('<App />', () => {
-  let App;
+describe('<withTheme />', () => {
+  let withTheme;
 
   before(() => {
-    App = proxyquire.noCallThru().load('./App', {
-      'react-router-config': {
-        renderRoutes: renderRoutesStub,
-      },
+    withTheme = proxyquire.noCallThru().load('./withTheme', {
       'react-jss': {
         ThemeProvider: MockThemeProvider,
       },
-      '../routes': mockRoutes,
       '../styles/theme': mockTheme,
     }).default;
   });
 
   describe('the components expected to be rendered', () => {
-    let myComponent;
     let themeProvider;
 
     before(() => {
-      myComponent = shallow(<App />);
-      themeProvider = myComponent.find(MockThemeProvider);
+      const WrappedComponent = withTheme(MockBaseComponent);
+      const renderedComponent = shallow(<WrappedComponent />);
+      themeProvider = renderedComponent.find(MockThemeProvider);
     });
 
     it('should contain one ThemeProvider component', () => {
@@ -40,10 +35,6 @@ describe('<App />', () => {
 
     it('ThemeProvider should be passed the theme', () => {
       expect(themeProvider.getElement().props.theme).to.be.eql(mockTheme);
-    });
-
-    it('should invoke the renderRoutes once with the routes from the prop', () => {
-      expect(renderRoutesStub).calledOnce.calledOnceWith(mockRoutes);
     });
   });
 });

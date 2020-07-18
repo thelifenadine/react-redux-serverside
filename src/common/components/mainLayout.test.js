@@ -25,6 +25,7 @@ describe('<MainLayout />', () => {
         createUseStyles: createUseStylesStub,
       },
       './Header': MockHeader,
+      './withTheme': (component) => (component),
     }).default;
   });
 

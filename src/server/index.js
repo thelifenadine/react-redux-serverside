@@ -3,18 +3,16 @@ import express from 'express';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
+import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router';
 import { JssProvider, SheetsRegistry, createGenerateId } from 'react-jss';
 
 import configureStore from '../common/configureStore';
 import mockApi from './mockApi';
 import renderFullPage from './renderFullPage';
-import App from '../common/components/App';
-// import routes from '../common/routes';
-// import { matchRoutes } from "react-router-config";
+import routes from '../common/routes';
 
 const app = express();
-
 // app.use(cors());
 
 // serve the dist folder since that's where our client app.bundle.js file will end up.
@@ -28,15 +26,11 @@ app.get('/*', (req, res) => {
   const sheets = new SheetsRegistry();
   const generateId = createGenerateId();
 
-  // const branch = matchRoutes(routes, req.url);
-  // const currentRoute = branch[1];
-  // console.log('current', currentRoute);
-
   const markup = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
         <JssProvider registry={sheets} generateId={generateId}>
-          <App />
+          {renderRoutes(routes)}
         </JssProvider>
       </StaticRouter>
     </Provider>
