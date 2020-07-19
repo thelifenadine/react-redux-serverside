@@ -1,10 +1,12 @@
 import serialize from 'serialize-javascript';
 
-const renderFullPage = (markup, initialState, title, css) => {
+const renderFullPage = (markup, initialState, title, css, extractor) => {
   return `
     <!DOCTYPE html>
     <html lang="en-us">
       <head>
+      ${extractor.getLinkTags()}
+      ${extractor.getStyleTags()}
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>${title}</title>
@@ -14,9 +16,7 @@ const renderFullPage = (markup, initialState, title, css) => {
 
       <body>
         <div id="app">${markup}</div>
-        <script src="/runtime.bundle.js"></script>
-        <script src="/vendors.bundle.js"></script>
-        <script src="/app.bundle.js"></script>
+        ${extractor.getScriptTags()}
       </body>
     </html>
     `;

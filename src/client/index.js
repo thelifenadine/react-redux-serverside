@@ -1,4 +1,5 @@
 import React from 'react';
+import { loadableReady } from '@loadable/component';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,17 +14,17 @@ if (initialState) {
   initialState.parentElement.removeChild(initialState);
 }
 
-const renderApp = () => hydrate(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ReduxAsyncConnect routes={routes} />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("app"),
-  () => {
-    const ssStyles = document.getElementById('jss-styles');
-    ssStyles.parentNode.removeChild(ssStyles);
-  }
-);
-
-renderApp();
+loadableReady(() => {
+  hydrate(
+    <Provider store={store}>
+      <BrowserRouter>
+        <ReduxAsyncConnect routes={routes} />
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById("app"),
+    () => {
+      const ssStyles = document.getElementById('jss-styles');
+      ssStyles.parentNode.removeChild(ssStyles);
+    }
+  );
+});

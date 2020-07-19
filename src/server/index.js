@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 // import cors from 'cors';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -7,10 +8,14 @@ import { StaticRouter } from 'react-router';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import { JssProvider, SheetsRegistry, createGenerateId } from 'react-jss';
 import { parse as parseUrl } from 'url';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import configureStore from '../common/configureStore';
 import mockApi from './mockApi';
 import renderFullPage from './renderFullPage';
 import routes from '../common/routes';
+
+const statsFile = path.resolve('dist/loadable-stats.json');
+const extractor = new ChunkExtractor({ statsFile, entrypoints: ["app"]  });
 
 const app = express();
 // app.use(cors());
@@ -34,13 +39,15 @@ app.get('/*', (req, res) => {
       const context = {};
 
       const markup = renderToString(
-        <Provider store={store} key="provider">
-          <StaticRouter location={req.url} context={context}>
-            <JssProvider registry={sheets} generateId={generateId}>
-              <ReduxAsyncConnect routes={routes} helpers={helpers} />
-            </JssProvider>
-          </StaticRouter>
-        </Provider>
+        <ChunkExtractorManager extractor={extractor}>
+          <Provider store={store} key="provider">
+            <StaticRouter location={req.url} context={context}>
+              <JssProvider registry={sheets} generateId={generateId}>
+                <ReduxAsyncConnect routes={routes} helpers={helpers} />
+              </JssProvider>
+            </StaticRouter>
+          </Provider>
+        </ChunkExtractorManager>
       );
 
       if (context.url) {
@@ -49,7 +56,7 @@ app.get('/*', (req, res) => {
       }
 
       const initialState = store.getState();
-      res.send(renderFullPage(markup, initialState, 'nadine made a website', sheets.toString()));
+      res.send(renderFullPage(markup, initialState, 'nadine made a website', sheets.toString(), extractor));
     });
 });
 

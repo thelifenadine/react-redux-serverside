@@ -1,8 +1,13 @@
+import loadable from '@loadable/component';
+
+// for the components that retrieve async content,
+// loadable can be used for the child components
 import MainLayout from './components/MainLayout';
-import Home from './components/Home';
-import Somewhere from './components/Somewhere';
-import AnotherPage from './components/AnotherPage';
-import NotFound from './components/NotFound';
+import SomewhereConnector from './components/SomewhereConnector';
+
+const Home = loadable(() => import('./components/Home'));
+const AnotherPage = loadable(() => import('./components/AnotherPage'));
+const NotFound = loadable(() => import('./components/NotFound'));
 
 const routes = [
   {
@@ -19,7 +24,7 @@ const routes = [
       },
       {
         path: '/somewhere',
-        component: Somewhere,
+        component: SomewhereConnector,
       },
       {
         path: '/*',

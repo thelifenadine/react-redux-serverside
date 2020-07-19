@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const nodeEnv = process.env.NODE_ENV;
 const isProduction = nodeEnv !== 'development';
@@ -28,6 +29,7 @@ module.exports = merge(environmentSettings, {
     publicPath: '/',
   },
   plugins: [
+    new LoadablePlugin(),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new webpack.EnvironmentPlugin(['NODE_ENV'])
   ],
