@@ -52,11 +52,9 @@ MainLayout.propTypes = {
   route: PropTypes.object.isRequired,
 };
 
-export default asyncConnect([
-  {
-    promise: ({ store: { dispatch } }) => (
-      dispatch(fetchRecipesIfNeeded('appetizer'))
-    ),
-  }
-])(withTheme(MainLayout));
+export default asyncConnect([{
+  promise: ({ store: { dispatch } }) => (
+    dispatch(fetchRecipesIfNeeded('appetizer'))
+  ),
+}])(withTheme(MainLayout));
 

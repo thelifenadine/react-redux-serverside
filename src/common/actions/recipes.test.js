@@ -31,7 +31,7 @@ describe('recipe actions', () => {
     clock.restore();
   });
 
-  describe('when the component is rendered', () => {
+  describe('the expected behavior', () => {
     before(() => {
       axiosStub.returns({
         data: [{ item: 'one' }],
