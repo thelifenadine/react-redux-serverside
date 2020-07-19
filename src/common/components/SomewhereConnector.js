@@ -1,6 +1,5 @@
 import get from 'lodash/get';
 import React from 'react';
-
 import { asyncConnect } from 'redux-connect';
 import loadable from '@loadable/component';
 import { fetchRecipesIfNeeded } from '../actions/recipes';

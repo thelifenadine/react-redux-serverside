@@ -2,4 +2,14 @@
 
 # react-redux-serverside
 
-A (work in progress) template for building server rendered sites with react, redux, webpack, etc.
+An example template for building universal/isomorphic web apps with `react`, `redux`, and `react-router`.
+
+`babel` for transpiling and `webpack` for bundling. `loadable-components` for code splitting.
+
+`redux-connect` with `react-router-config` for async data handling
+
+`jss` for styles.
+
+Testing via `mocha`, `chai`, and `enzyme`. `nyc` for test coverage.
+
+`express` server to render the app, also includes a test API for data fetching examples.
