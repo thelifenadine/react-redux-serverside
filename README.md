@@ -2,14 +2,20 @@
 
 # react-redux-serverside
 
-An example template for building universal/isomorphic web apps with `react`, `redux`, and `react-router`.
+This is a template for building universal/isomorphic web apps with `react`, `redux`, and `react-router`. The styles are just enough to provide examples of `jss`, hopefully one day I will make it look nicer! The tests are also minimal, the goal is to have some examples to get you started.
 
-`babel` for transpiling and `webpack` for bundling. `loadable-components` for code splitting.
+### Instructions
+`git clone git@github.com:thelifenadine/react-redux-serverside.git`
 
-`redux-connect` with `react-router-config` for async data handling
+`npm install && npm run start` then navigate to http://localhost:3000 in a browser.
 
-`jss` for styles.
-
-Testing via `mocha`, `chai`, and `enzyme`. `nyc` for test coverage.
-
-`express` server to render the app, also includes a test API for data fetching examples.
+### Overview of libraries:
+| library | function |
+| ----------- | ----------- |
+| `babel` | transpiling |
+| `webpack` | bundling |
+| `loadable-components` | code splitting |
+| `redux-connect` with `react-router-config` | for async data handling |
+| `jss` | styles |
+| `express` | server |
+| `mocha`, `chai`, `enzyme`, `nyc` | tests |
