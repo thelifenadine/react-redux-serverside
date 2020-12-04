@@ -8,6 +8,8 @@ import SomewhereConnector from './components/SomewhereConnector';
 
 // lazy load components that have no data fetching
 const AnotherPage = loadable(() => import('./components/AnotherPage'));
+const Login = loadable(() => import('./components/auth/Login'));
+const SignUp = loadable(() => import('./components/auth/SignUp'));
 const NotFound = loadable(() => import('./components/NotFound'));
 const Home = loadable(() => import('./components/Home'), {
   fallback: <div>Loading...</div>,
@@ -21,6 +23,14 @@ const routes = [
         exact: true,
         path: '/',
         component: Home,
+      },
+      {
+        path: '/login',
+        component: Login,
+      },
+      {
+        path: '/signup',
+        component: SignUp,
       },
       {
         path: '/another',

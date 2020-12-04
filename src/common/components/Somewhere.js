@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles, useTheme } from 'react-jss';
+import Header1 from './layout/Header1';
 
 const useStyles = createUseStyles({
   anotherH2: {
     color: 'pink',
-    marginBottom: 20,
   }
 });
 
@@ -16,7 +16,7 @@ const Somewhere = (props) => {
 
   return (
     <div className={css.container}>
-      <h2 className={css.anotherH2}>Somewhere</h2>
+      <Header1 className={css.anotherH2}>Somewhere in pink, data is passed through props from route connector component</Header1>
       {lunches &&
         <ul>
           {lunches.map(item => (<li key={item.name}>{item.name}</li>))}

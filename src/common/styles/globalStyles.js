@@ -43,5 +43,22 @@ export default (theme) => ({
       textDecoration: 'none',
       color: theme.palette.textSecondary,
     },
+    label: {
+      color: theme.palette.textPrimary,
+    },
+    input: {
+      padding: theme.form.padding,
+      marginBottom: theme.form.spacing,
+      border: `solid 1px ${theme.palette.border}`,
+    },
+    button: {
+      padding: theme.form.padding,
+      border: `solid 1px ${theme.palette.border}`,
+      fontSize: 16,
+      color: theme.palette.textSecondary,
+      '&:hover': {
+        cursor: 'pointer',
+      }
+    },
   },
 });

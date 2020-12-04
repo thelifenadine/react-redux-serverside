@@ -3,9 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles, useTheme } from 'react-jss';
 import { connect } from 'react-redux';
+import Header1 from './layout/Header1';
 
 const useStyles = createUseStyles({
-  anotherH2: {
+  headingStyles: {
     color: 'orange',
   }
 });
@@ -17,7 +18,7 @@ const AnotherPage = (props) => {
 
   return (
     <div className={css.container}>
-      <h2 className={css.anotherH2}>AnotherPage</h2>
+      <Header1 className={css.headingStyles}>Another Page Header, this time in orange. data comes from connect (parent component connected and fetched via async)</Header1>
       {appetizers &&
         <ul>
           {appetizers.map(item => (<li key={item.name}>{item.name}</li>))}

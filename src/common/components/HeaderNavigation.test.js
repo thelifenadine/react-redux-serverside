@@ -6,8 +6,8 @@ import { expect } from 'chai';
 
 const MockLink = sinon.stub().returns(<div />);
 
-describe('<Header />', () => {
-  let Header;
+describe('<HeaderNavigation />', () => {
+  let HeaderNavigation;
   const useLocationStub = sinon.stub().returns({ pathname: '/' });
   const useStylesStub = sinon.stub().returns({});
   const createUseStylesStub = sinon.stub().withArgs({}).returns(useStylesStub);
@@ -16,7 +16,7 @@ describe('<Header />', () => {
   const fetchRecipesIfNeededStub = sinon.stub();
 
   before(() => {
-    Header = proxyquire.noCallThru().load('./Header', {
+    HeaderNavigation = proxyquire.noCallThru().load('./HeaderNavigation', {
       'react-router-dom': {
         Link: MockLink,
         useLocation: useLocationStub,
@@ -37,11 +37,11 @@ describe('<Header />', () => {
     let myComponent;
 
     before(() => {
-      myComponent = shallow(<Header />);
+      myComponent = shallow(<HeaderNavigation />);
     });
 
-    it('should contain 3 Link components', () => {
-      expect(myComponent.find(MockLink)).to.have.lengthOf(3);
+    it('should contain 5 Link components', () => {
+      expect(myComponent.find(MockLink)).to.have.lengthOf(5);
     });
 
     it('should invoke the useDispatch function once', () => {
@@ -53,7 +53,7 @@ describe('<Header />', () => {
     let myComponent;
 
     before(() => {
-      myComponent = shallow(<Header />);
+      myComponent = shallow(<HeaderNavigation />);
       myComponent.find({ 'data-id': 'home-link' }).simulate('click');
     });
 
