@@ -40,18 +40,16 @@ describe('recipe actions', () => {
 
     it('creates PENDING and SUCCESS when fetching recipes has been fetched', () => {
       const expectedActions = [
-        { type: `${GET_RECIPES}_PENDING`, contentKey: 'sweets' },
-        { type: `${GET_RECIPES}_SUCCESS`, contentKey: 'sweets', receivedAt: now, items: [{ item: 'one' }] },
+        { type: `${GET_RECIPES}`, contentKey: 'sweets', api: { endpoint: 'getByCategory', args: { category: 'sweets' }}},
       ];
 
       const store = mockStore({
         recipesByCategory: 'lunches',
       });
 
-      return store.dispatch(fileImport.fetchRecipesIfNeeded('sweets')).then(() => {
-        // return async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
+      store.dispatch(fileImport.fetchRecipesIfNeeded('sweets'));
+
+      expect(store.getActions()).to.eql(expectedActions);
     });
   });
 });

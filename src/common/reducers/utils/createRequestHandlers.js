@@ -1,4 +1,4 @@
-import { pending, success, failed } from './asyncActionNameSuffixes';
+import { pending, fulfilled, rejected } from './asyncActionNameSuffixes';
 
 export default function createRequestHandlers({ actionNameRoot }) {
   return {
@@ -12,7 +12,7 @@ export default function createRequestHandlers({ actionNameRoot }) {
         },
       };
     },
-    [failed(actionNameRoot)](state, action) {
+    [rejected(actionNameRoot)](state, action) {
       const { contentKey } = action;
 
       return {
@@ -23,7 +23,7 @@ export default function createRequestHandlers({ actionNameRoot }) {
         },
       };
     },
-    [success(actionNameRoot)](state, action) {
+    [fulfilled(actionNameRoot)](state, action) {
       const { contentKey, items, receivedAt } = action;
 
       return {
