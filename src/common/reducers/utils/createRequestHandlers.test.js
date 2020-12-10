@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import createMappedReducer from './createMappedReducer';
 import createRequestHandlers from './createRequestHandlers';
-import { pending, fulfilled, rejected } from './asyncActionNameSuffixes';
 
 const ROOT_EXAMPLE_NAME = 'ROOT_EXAMPLE_NAME';
 
