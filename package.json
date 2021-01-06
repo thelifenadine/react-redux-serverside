@@ -65,7 +65,7 @@
     "@babel/polyfill": "7.10.4",
     "@loadable/component": "5.13.1",
     "@loadable/server": "5.13.1",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "clsx": "1.1.1",
     "cors": "2.8.5",
     "lodash": "4.17.19",
